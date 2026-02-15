@@ -41,11 +41,6 @@ export default async function handler(
           }),
         );
 
-        console.log(
-          "[LOG] Repository data fetched successfully:",
-          response.data,
-        );
-
         res.status(200).json(repositoryData);
       });
   } catch (error) {

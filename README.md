@@ -1,40 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+## Desafios e Decisões Técnicas
 
-## Getting Started
+# Componente de Pesquisa Responsivo
 
-First, run the development server:
+Um dos desafios foi lidar com a diferença de comportamento do componente de pesquisa entre desktop e mobile.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Ao invés de duplicar o componente e manter duas implementações com a mesma responsabilidade, usei a criatividade e adaptei a estrutura e o comportamento dinamicamente com base no contexto de exibição.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Aplicação de filtro
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+A API do GitHub não fornece todos os filtros necessários diretamente via query params para a listagem de repositórios.
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Diante disso, implementei uma camada de filtragem no client-side, A lógica foi estruturada de forma desacoplada.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Observações e melhorias
 
-## Learn More
+# ISR no perfil
 
-To learn more about Next.js, take a look at the following resources:
+A página de perfil foi configurada utilizando **Incremental Static Regeneration (ISR)**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+- Os dados do perfil do GitHub não mudam com alta frequência
+- Permite carregamento extremamente rápido no primeiro acesso
+- Reduz chamadas desnecessárias à API externa
+- Melhora experiência do usuário
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Paginação
 
-## Deploy on Vercel
+Uma possível melhoria futura seria a implementação de paginação para a listagem de repositórios.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Apesar de tecnicamente recomendável para escalabilidade, não implementei por limitação do layout proposto.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+---
+
+## Instruções para Executar o Projeto
+
+# 1. Configuração de variaveis de ambiente
+
+Crie um arquivo `.env` na raiz do projeto:
+
+GITHUB_API_KEY=""
+GITHUB_BASE_URL=""
+
+Obs: a variável GITHUB_API_KEY é sensível, tenha cuidado ao manipulá-la.
+
+# 2. Instalação das Dependências
+
+Execute o comando abaixo para instalar as dependências
+
+npm install ou yarn install
+
+# 3. Build da aplicação
+
+Execute o comando abaixo para realizar o build da aplicação
+
+npm run build
+
+# 4. Executar em Produção
+
+npm run start

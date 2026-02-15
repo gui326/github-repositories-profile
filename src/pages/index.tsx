@@ -1,7 +1,11 @@
-import IndexScreen from "@/screens/IndexScreen";
 import Head from "next/head";
+import axios from "axios";
 
-export default function Home() {
+import IndexScreen from "@/screens/IndexScreen";
+import { IUserProfile } from "@/types/IUser";
+import apiGithub from "@/services/apiGithub";
+
+export default function Home({ userData }: { userData: IUserProfile }) {
   return (
     <>
       <Head>
@@ -11,7 +15,36 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <IndexScreen />
+      <IndexScreen userData={userData} />
     </>
   );
+}
+
+export async function getStaticProps() {
+  let userData: IUserProfile | null = null;
+
+  try {
+    const response = await apiGithub.get("/user");
+    const { name, bio, avatar_url, blog, location, company } = response.data;
+
+    userData = { name, bio, avatar_url, blog, location, company };
+  } catch (error) {
+    console.error("[LOG] Error fetching GitHub user data:", error);
+
+    userData = {
+      name: "Nome não disponível",
+      bio: "Biografia não disponível",
+      avatar_url: "/default-avatar.png",
+      blog: "",
+      location: "",
+      company: "",
+    };
+  }
+
+  return {
+    props: {
+      userData: userData,
+    },
+    revalidate: 1800, // 30 mins para revalidar
+  };
 }

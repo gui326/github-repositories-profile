@@ -13,7 +13,7 @@ export default function RepositoriesContent() {
 
   return (
     <div className="flex flex-col w-full pb-8">
-      <Tabs tabActive={tabActive} setTabActive={setTabActive} />
+      <Tabs tabActive={tabActive} setTabActive={setTabActive} search={search} />
 
       <Filters setSearch={setSearch} />
 

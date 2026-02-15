@@ -7,15 +7,21 @@ import { TTabOptions } from "..";
 import { IRepositoryProps } from "@/types/IRepository";
 import { getRepos } from "@/services/repos.services";
 import { REACT_QUERY_KEYS } from "@/constants/react_query_keys";
+import { useFiltersRepositoriesStore } from "@/store/useFiltersRepositoriesStore";
+import { filteredRepositories } from "@/utils/filtersUtils";
 
 export default function Tabs({
   tabActive,
   setTabActive,
+  search,
 }: {
   tabActive: TTabOptions;
   setTabActive: (value: TTabOptions) => void;
+  search: string;
 }) {
   const router = useRouter();
+
+  const { filters } = useFiltersRepositoriesStore();
 
   const { data: repositories, isFetching } = useQuery<IRepositoryProps[]>({
     queryKey: [REACT_QUERY_KEYS.REPOSITORIES],
@@ -23,22 +29,21 @@ export default function Tabs({
     staleTime: 10 * 60 * 300, // 3 minutos
   });
 
-  const starredCount = repositories?.filter(
-    (repo) => repo.stargazers_count > 0,
-  ).length;
-
   const OPTIONS_TAB = [
     {
       name: "Repositories",
       value: "all",
       icon_url: "/assets/icons/icone_livro.svg",
-      count: repositories?.length || 0,
+      count:
+        filteredRepositories(search, repositories, "all", filters)?.length || 0,
     },
     {
       name: "Starred",
       value: "starred",
       icon_url: "/assets/icons/icone_estrela.svg",
-      count: starredCount || 0,
+      count:
+        filteredRepositories(search, repositories, "starred", filters)
+          ?.length || 0,
     },
   ];
 

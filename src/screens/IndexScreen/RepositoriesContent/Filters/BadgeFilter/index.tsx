@@ -11,9 +11,11 @@ import WrapperDrawerMobile from "./WrapperDrawerMobile";
 export default function BadgeFilter({
   filterKey,
   filterName,
+  isMultiple = true,
 }: {
   filterKey: keyof IRepositoryFiltersProps;
   filterName: string;
+  isMultiple?: boolean;
 }) {
   const isMobile = useIsMobile();
   const { filters, setFilters } = useFiltersRepositoriesStore();
@@ -31,12 +33,20 @@ export default function BadgeFilter({
   ) => {
     const isSelected = filters[filterKey].includes(option);
 
-    if (isSelected) {
-      setFilters({
-        [filterKey]: filters[filterKey].filter((item) => item !== option),
-      });
+    if (!isMultiple) {
+      if (isSelected) {
+        setFilters({ [filterKey]: [] });
+      } else {
+        setFilters({ [filterKey]: [option] });
+      }
     } else {
-      setFilters({ [filterKey]: [...filters[filterKey], option] });
+      if (isSelected) {
+        setFilters({
+          [filterKey]: filters[filterKey].filter((item) => item !== option),
+        });
+      } else {
+        setFilters({ [filterKey]: [...filters[filterKey], option] });
+      }
     }
   };
 
@@ -71,6 +81,7 @@ export default function BadgeFilter({
             handleSelect={handleSelect}
             filterKey={filterKey}
             optionsActive={filters[filterKey]}
+            isMultiple={isMultiple}
           />
         </WrapperDrawerMobile>
       ) : (
@@ -84,6 +95,7 @@ export default function BadgeFilter({
             handleSelect={handleSelect}
             filterKey={filterKey}
             optionsActive={filters[filterKey]}
+            isMultiple={isMultiple}
           />
         </WrapperMenuDesktop>
       )}

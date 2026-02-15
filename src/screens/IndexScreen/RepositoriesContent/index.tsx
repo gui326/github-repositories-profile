@@ -12,12 +12,12 @@ export default function RepositoriesContent() {
   const [search, setSearch] = useState("");
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full pb-8">
       <Tabs tabActive={tabActive} setTabActive={setTabActive} />
 
-      <Filters search={search} setSearch={setSearch} />
+      <Filters setSearch={setSearch} />
 
-      <Repositories tabActive={tabActive} />
+      <Repositories tabActive={tabActive} search={search} />
     </div>
   );
 }

@@ -1,21 +1,12 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useQuery } from "@tanstack/react-query";
 
 import { TTabOptions } from "..";
-
-const OPTIONS_TAB = [
-  {
-    name: "Repositories",
-    value: "all",
-    icon_url: "/assets/icons/icone_livro.svg",
-  },
-  {
-    name: "Starred",
-    value: "starred",
-    icon_url: "/assets/icons/icone_estrela.svg",
-  },
-];
+import { IRepositoryProps } from "@/types/IRepository";
+import { getRepos } from "@/services/repos.services";
+import { REACT_QUERY_KEYS } from "@/constants/react_query_keys";
 
 export default function Tabs({
   tabActive,
@@ -25,6 +16,31 @@ export default function Tabs({
   setTabActive: (value: TTabOptions) => void;
 }) {
   const router = useRouter();
+
+  const { data: repositories, isFetching } = useQuery<IRepositoryProps[]>({
+    queryKey: [REACT_QUERY_KEYS.REPOSITORIES],
+    queryFn: () => getRepos(),
+    staleTime: 10 * 60 * 300, // 3 minutos
+  });
+
+  const starredCount = repositories?.filter(
+    (repo) => repo.stargazers_count > 0,
+  ).length;
+
+  const OPTIONS_TAB = [
+    {
+      name: "Repositories",
+      value: "all",
+      icon_url: "/assets/icons/icone_livro.svg",
+      count: repositories?.length || 0,
+    },
+    {
+      name: "Starred",
+      value: "starred",
+      icon_url: "/assets/icons/icone_estrela.svg",
+      count: starredCount || 0,
+    },
+  ];
 
   const handleTab = (value: TTabOptions) => {
     setTabActive(value);
@@ -63,7 +79,7 @@ export default function Tabs({
           <p>{option.name}</p>
 
           <span className="text-xs font-regular border-1 text-[#989898] border-[#DBDBDB] bg-[#F8F8F8] rounded-full px-[10px] py-[4px]">
-            81
+            {option.count}
           </span>
         </div>
       ))}

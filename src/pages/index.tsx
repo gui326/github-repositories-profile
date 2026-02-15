@@ -3,7 +3,7 @@ import axios from "axios";
 
 import IndexScreen from "@/screens/IndexScreen";
 import { IUserProfile } from "@/types/IUser";
-import apiGithub from "@/services/apiGithub";
+import apiGithub from "@/lib/apiGithub";
 
 export default function Home({ userData }: { userData: IUserProfile }) {
   return (

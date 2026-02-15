@@ -1,40 +1,45 @@
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+
+import { IRepositoryProps } from "@/types/IRepository";
 
 export default function Repository({
+  repository,
   isStarredOn = false,
 }: {
+  repository: IRepositoryProps;
   isStarredOn: boolean;
 }) {
   return (
     <article>
       <div>
         <h3 className={"text-lg font-light"}>
-          Text /{" "}
+          {repository.owner?.login} /{" "}
           <Link
-            href="#"
+            href={repository.html_url}
             className="text-blue-500 hover:text-blue-900 font-semibold"
+            target="_blank"
           >
-            Text link
+            {repository.name}
           </Link>
         </h3>
       </div>
 
       <p className="my-[8px] text-sm text-[#989898] font-regular">
-        description repository here
+        {repository.description}
       </p>
 
       <div className="flex gap-[64px]">
         {isStarredOn ? (
           <p
-            title="Linguagem de programação: C++"
+            title={`Linguagem de programação: ${repository?.language}`}
             className="text-sm font-regular"
           >
-            C++
+            {repository?.language}
           </p>
         ) : (
           <p
-            title="quantidade de estrelas: 123"
+            title={`Quantidade de estrelas: ${repository?.stargazers_count}`}
             className="flex items-center gap-[8px] text-sm/2 font-regular"
           >
             <Image
@@ -46,12 +51,12 @@ export default function Repository({
               width={20}
               height={20}
             />
-            123
+            {repository?.stargazers_count}
           </p>
         )}
 
         <p
-          title="Quantidade de forks: 526"
+          title={`Quantidade de forks: ${repository?.forks_count}`}
           className="flex items-center gap-[8px] text-sm/2 font-regular"
         >
           <Image
@@ -63,7 +68,7 @@ export default function Repository({
             width={20}
             height={20}
           />
-          526
+          {repository?.forks_count}
         </p>
       </div>
     </article>

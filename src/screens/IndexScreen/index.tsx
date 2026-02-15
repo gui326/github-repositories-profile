@@ -1,6 +1,8 @@
+import { Container } from "@mui/material";
+
 import Header from "@/components/Header";
 import UserContent from "./UserContent";
-import { Container } from "@mui/material";
+import RepositoriesContent from "./RepositoriesContent";
 
 export default function IndexScreen() {
   return (
@@ -8,8 +10,10 @@ export default function IndexScreen() {
       <Header />
 
       <section className="mt-[32px]">
-        <Container className="flex">
+        <Container className="flex gap-[80px]">
           <UserContent />
+
+          <RepositoriesContent />
         </Container>
       </section>
     </>

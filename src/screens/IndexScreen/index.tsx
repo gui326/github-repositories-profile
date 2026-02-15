@@ -1,3 +1,9 @@
+import Header from "@/components/Header";
+
 export default function IndexScreen() {
-  return <div></div>;
+  return (
+    <main>
+      <Header />
+    </main>
+  );
 }

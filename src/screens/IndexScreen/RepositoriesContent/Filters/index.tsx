@@ -21,8 +21,9 @@ export default function Filters({
   const STYLE_MOBILE_INPUT = {
     position: "absolute",
     translate: "0 -8px",
-    left: "0",
+    left: "16px",
     zIndex: 10,
+    maxWidth: { md: "unset", xs: "calc(100vw - 32px)" },
     display: isSearchOpen ? "block" : "none",
     ".MuiInputBase-root": {
       background: "#FFF",
@@ -48,7 +49,7 @@ export default function Filters({
 
   return (
     <div
-      className="p-2 lg:p-0 lg:bg-transparent bg-gray-900 
+      className="p-2 lg:p-0 lg:bg-transparent lg:dark:bg-transparent dark:bg-gray-900 bg-[#F8F8F8]
     mt-[48px] w-full xl:flex-row lg:flex-col flex-row flex xl:items-center items-between lg:justify-between justify-center xl:gap-[64px] lg:gap-[32px] gap-[16px] rounded-lg"
     >
       <form

@@ -57,7 +57,7 @@ export default function BadgeFilter({
           setAnchorEl(event.currentTarget);
           setOpen((prev) => !prev);
         }}
-        className="flex-shrink-0 flex items-center gap-[10px] hover:brightness-90 cursor-pointer py-[8px] pl-[8px] pr-[18px] bg-gradient-to-r rounded-full from-[#0056A6] to-[#0587FF]"
+        className="flex-shrink-0 flex text-white items-center gap-[10px] hover:brightness-90 cursor-pointer py-[8px] pl-[8px] pr-[18px] bg-gradient-to-r rounded-full from-[#0056A6] to-[#0587FF]"
       >
         <Image
           quality={100}

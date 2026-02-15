@@ -54,7 +54,7 @@ export default function UserContent({ userData }: { userData: IUserProfile }) {
         <h1 className="mt-[24px] text-xl lg:text-2xl font-bold">
           {userData?.name}
         </h1>
-        <p className="mt-[4px] lg:text-base text-sm text-center font-regular">
+        <p className="mt-[4px] text-gray-500 lg:text-base text-sm text-center font-regular">
           {userData?.bio}
         </p>
       </div>
@@ -77,7 +77,7 @@ export default function UserContent({ userData }: { userData: IUserProfile }) {
       </p>
 
       <Collapse in={isMobile ? openInfoExtraMobile : true}>
-        <nav className="lg:bg-transparent bg-gray-900 lg:mt-[32px] mt-[8px] rounded-[16px] lg:p-0 p-[16px]">
+        <nav className="lg:dark:bg-transparent lg:bg-transparent dark:bg-gray-900 bg-[#F8F8F8] lg:mt-[32px] mt-[8px] rounded-[16px] lg:p-0 p-[16px]">
           <ul className="flex flex-col gap-[16px]">
             {OPTIONS?.map((option) => (
               <li

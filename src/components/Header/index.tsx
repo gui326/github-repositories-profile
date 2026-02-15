@@ -4,7 +4,7 @@ import { Container } from "@mui/material";
 
 export default function Header() {
   return (
-    <header className="w-full lg:flex hidden h-[72px] bg-gray-800 text-white items-center justify-center">
+    <header className="w-full lg:flex hidden h-[72px] bg-gray-900 text-white items-center justify-center">
       <Container className="flex items-center gap-5">
         <Link href="https://github.com" target="_blank" className="flex">
           <Image

@@ -1,5 +1,4 @@
 import Head from "next/head";
-import axios from "axios";
 
 import IndexScreen from "@/screens/IndexScreen";
 import { IUserProfile } from "@/types/IUser";

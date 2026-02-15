@@ -1,10 +1,16 @@
+import { useState } from "react";
 import Link from "next/link";
-import { Avatar } from "@mui/material";
+import { Avatar, Collapse } from "@mui/material";
 import Image from "next/image";
 
 import { IUserProfile } from "@/types/IUser";
+import useIsMobile from "@/hooks/useIsMobile";
 
 export default function UserContent({ userData }: { userData: IUserProfile }) {
+  const isMobile = useIsMobile();
+
+  const [openInfoExtraMobile, setOpenInfoExtraMobile] = useState(false);
+
   const OPTIONS = [
     {
       name: userData?.company,
@@ -53,31 +59,50 @@ export default function UserContent({ userData }: { userData: IUserProfile }) {
         </p>
       </div>
 
-      <nav className="mt-[32px]">
-        <ul className="flex flex-col gap-[16px]">
-          {OPTIONS?.map((option) => (
-            <li
-              className={option?.name ? "flex" : "hidden"}
-              key={option?.value}
-            >
-              <Link
-                className="flex items-center gap-[10px] text-sm text-regular text-blue-500 hover:brightness-90"
-                href={option?.link ?? "#"}
-              >
-                <Image
-                  quality={100}
-                  src={option?.icon_url}
-                  alt={option?.name}
-                  width={16}
-                  height={16}
-                />
+      <p
+        className="mt-[24px] text-blue-500 flex flex-col gap-[4px] items-center text-center lg:hidden text-sm font-regular"
+        onClick={() => setOpenInfoExtraMobile((prev) => !prev)}
+      >
+        Informações Adicionais
+        <span>
+          <Image
+            className={`transition-transform ${openInfoExtraMobile ? "rotate-180" : ""}`}
+            quality={100}
+            src={"/assets/icons/icone_seta_baixo_azul.svg"}
+            alt={"Icone"}
+            width={24}
+            height={24}
+          />
+        </span>
+      </p>
 
-                {option?.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <Collapse in={isMobile ? openInfoExtraMobile : true}>
+        <nav className="lg:bg-transparent bg-gray-900 lg:mt-[32px] mt-[8px] rounded-[16px] lg:p-0 p-[16px]">
+          <ul className="flex flex-col gap-[16px]">
+            {OPTIONS?.map((option) => (
+              <li
+                className={option?.name ? "flex" : "hidden"}
+                key={option?.value}
+              >
+                <Link
+                  className="flex items-center gap-[10px] text-sm text-regular text-blue-500 hover:brightness-90"
+                  href={option?.link ?? "#"}
+                >
+                  <Image
+                    quality={100}
+                    src={option?.icon_url}
+                    alt={option?.name}
+                    width={16}
+                    height={16}
+                  />
+
+                  {option?.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </Collapse>
     </aside>
   );
 }

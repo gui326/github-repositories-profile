@@ -11,7 +11,7 @@ export default function IndexScreen({ userData }: { userData: IUserProfile }) {
       <Header />
 
       <section className="mt-[32px]">
-        <Container className="flex gap-[80px]">
+        <Container className="flex lg:flex-row flex-col lg:gap-[80px] gap-[40px]">
           <UserContent userData={userData} />
 
           <RepositoriesContent />

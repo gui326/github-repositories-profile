@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Avatar } from "@mui/material";
+import Image from "next/image";
 
 import { IUserProfile } from "@/types/IUser";
-import Image from "next/image";
 
 export default function UserContent({ userData }: { userData: IUserProfile }) {
   const OPTIONS = [
@@ -35,8 +35,8 @@ export default function UserContent({ userData }: { userData: IUserProfile }) {
             alt={userData?.name ?? "User Avatar"}
             className="shadow-xs"
             sx={{
-              width: "150px",
-              height: "150px",
+              width: { md: "150px", xs: "104px" },
+              height: { md: "150px", xs: "104px" },
             }}
           />
 
@@ -45,8 +45,10 @@ export default function UserContent({ userData }: { userData: IUserProfile }) {
           </div>
         </div>
 
-        <h1 className="mt-[24px] text-xl font-bold">{userData?.name}</h1>
-        <p className="mt-[4px] text-base text-center font-regular">
+        <h1 className="mt-[24px] text-xl lg:text-2xl font-bold">
+          {userData?.name}
+        </h1>
+        <p className="mt-[4px] lg:text-base text-sm text-center font-regular">
           {userData?.bio}
         </p>
       </div>

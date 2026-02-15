@@ -14,8 +14,8 @@ export default function WrapperDrawerMobile({
 }) {
   return (
     <Drawer anchor="bottom" open={open} onClose={handleClose}>
-      <div className="w-full px-4">
-        <div className="flex items-center justify-between">
+      <div className="w-full p-6">
+        <div className="mb-4 flex items-center justify-between">
           <h4 className="text-lg font-bold">{filterName}</h4>
 
           <IconButton

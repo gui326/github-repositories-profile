@@ -89,7 +89,7 @@ export default function Filters({
         />
       </form>
 
-      <div className="xl:order-2 lg:order-1 order-1 flex items-center gap-[16px]">
+      <div className="xl:order-2 lg:order-1 order-1 flex items-center lg:gap-[16px] gap-[12px]">
         <BadgeFilter filterKey="types" filterName="Type" isMultiple={false} />
         <BadgeFilter
           filterKey="languages"

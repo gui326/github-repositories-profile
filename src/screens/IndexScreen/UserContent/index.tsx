@@ -46,7 +46,7 @@ export default function UserContent({ userData }: { userData: IUserProfile }) {
             }}
           />
 
-          <div className="absolute bottom-0 right-0 bg-white rounded-full p-[8px]">
+          <div className="flex-shrink-0 absolute bottom-0 right-0 bg-white rounded-full lg:p-[8px] p-[4px]">
             😎
           </div>
         </div>

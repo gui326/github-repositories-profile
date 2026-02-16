@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { Checkbox, FormControlLabel, FormGroup, Radio } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -40,12 +40,23 @@ export default function ItemsFilters({
         <FormGroup>
           {options?.map((option) => (
             <FormControlLabel
+              key={option?.value}
               control={
-                <Checkbox
-                  checked={optionsActive.includes(option?.value)}
-                  onChange={() => handleSelect(filterKey, option?.value)}
-                  size="small"
-                />
+                <>
+                  {isMultiple ? (
+                    <Checkbox
+                      checked={optionsActive.includes(option?.value)}
+                      onChange={() => handleSelect(filterKey, option?.value)}
+                      size="small"
+                    />
+                  ) : (
+                    <Radio
+                      checked={optionsActive.includes(option?.value)}
+                      onChange={() => handleSelect(filterKey, option?.value)}
+                      size="small"
+                    />
+                  )}
+                </>
               }
               label={option?.label}
             />

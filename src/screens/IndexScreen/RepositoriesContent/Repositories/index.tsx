@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@mui/material";
 
 import Repository from "./Repository";
 import { TTabOptions } from "..";
@@ -25,8 +26,46 @@ export default function Repositories({
 
   return (
     <div className={"mt-[40px] flex flex-col gap-[56px]"}>
-      {isFetching ? (
-        <p>Carregando repositórios...</p>
+      {!isFetching ? (
+        <>
+          {[...Array(3)].map((_, index) => (
+            <div key={index}>
+              <Skeleton
+                variant="text"
+                width={240}
+                height={28}
+                className="dark:!bg-gray-700"
+              />
+
+              <Skeleton
+                variant="text"
+                width={300}
+                height={20}
+                className="dark:!bg-gray-700"
+                sx={{
+                  my: "8px",
+                  maxWidth: "100%",
+                }}
+              />
+
+              <div className="flex items-center gap-[64px]">
+                <Skeleton
+                  variant="rounded"
+                  width={40}
+                  height={20}
+                  className="dark:!bg-gray-700"
+                />
+
+                <Skeleton
+                  variant="rounded"
+                  width={40}
+                  height={20}
+                  className="dark:!bg-gray-700"
+                />
+              </div>
+            </div>
+          ))}
+        </>
       ) : (
         <>
           {filteredRepositories(search, repositories, tabActive, filters)?.map(

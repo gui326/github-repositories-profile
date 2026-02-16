@@ -40,6 +40,11 @@ export default function UserContent({ userData }: { userData: IUserProfile }) {
             src={userData?.avatar_url}
             alt={userData?.name ?? "User Avatar"}
             className="shadow-xs"
+            slotProps={{
+              img: {
+                fetchPriority: "high",
+              },
+            }}
             sx={{
               width: { md: "150px", xs: "104px" },
               height: { md: "150px", xs: "104px" },

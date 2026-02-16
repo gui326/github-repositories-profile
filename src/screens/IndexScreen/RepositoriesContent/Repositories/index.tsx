@@ -26,7 +26,7 @@ export default function Repositories({
 
   return (
     <div className={"mt-[40px] flex flex-col gap-[56px]"}>
-      {!isFetching ? (
+      {isFetching ? (
         <>
           {[...Array(3)].map((_, index) => (
             <div key={index}>

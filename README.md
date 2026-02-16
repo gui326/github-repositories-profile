@@ -39,8 +39,11 @@ Apesar de tecnicamente recomendável para escalabilidade, não implementei por l
 
 Crie um arquivo `.env` na raiz do projeto:
 
+```bash
 GITHUB_API_KEY=""
+
 GITHUB_BASE_URL=""
+```
 
 Obs: a variável GITHUB_API_KEY é sensível, tenha cuidado ao manipulá-la.
 
@@ -48,17 +51,17 @@ Obs: a variável GITHUB_API_KEY é sensível, tenha cuidado ao manipulá-la.
 
 Execute o comando abaixo para instalar as dependências
 
-npm install ou yarn install
+`npm install` ou `yarn install`
 
 ### 3. Build da aplicação
 
 Execute o comando abaixo para realizar o build da aplicação
 
-npm run build
+`npm run build`
 
 ### 4. Executar em Produção
 
-npm run start
+`npm run start`
 
 ---
 
